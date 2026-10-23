@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment Variables & Secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+
+# Local Data Storage & User Uploads
+data/
+*.pdf
+*.txt
+*.md
+!README.md
+
+# Database & Container Persistent Storage
+qdrant_data/
+neo4j_data/
+redis_data/
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Testing & Coverage Outputs
+.pytest_cache/
+.coverage
+htmlcov/
+.ragas/
+
+# Docker Logs
+*.log
