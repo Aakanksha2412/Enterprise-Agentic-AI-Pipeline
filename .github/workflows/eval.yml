@@ -25,7 +25,13 @@ jobs:
           pip install -r requirements.txt
           pip install pytest ragas datasets
 
-      - name: Spin Up Service Containers (Qdrant, Neo4j, Redis)
+      - name: Create Placeholder .env File
+        run: |
+          touch .env
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+          echo "COHERE_API_KEY=${{ secrets.COHERE_API_KEY }}" >> .env
+
+      - name: Spin Up Service Containers
         run: |
           docker compose up -d qdrant neo4j redis
           docker compose ps
