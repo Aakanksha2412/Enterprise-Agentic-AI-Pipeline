@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  # 1. Vector Database
+ # 1. Vector Database
   qdrant:
     image: qdrant/qdrant:v1.10.0
     container_name: qdrant_db
@@ -11,7 +9,7 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:6333/readyz"]
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:6333/readyz || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
