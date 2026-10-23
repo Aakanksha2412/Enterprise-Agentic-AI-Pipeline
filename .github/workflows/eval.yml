@@ -36,6 +36,12 @@ jobs:
           docker compose up -d qdrant neo4j redis
           docker compose ps
 
+      - name: Wait for Neo4j Database Readiness
+        run: |
+          echo "Waiting for Neo4j to accept connections on port 7687..."
+          timeout 60s bash -c 'until nc -z localhost 7687; do sleep 2; done'
+          sleep 5
+
       - name: Seed Sample Data & Run Ingestion Pipeline
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
