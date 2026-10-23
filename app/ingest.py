@@ -50,6 +50,8 @@ class IngestionPipeline:
                 vectors_config=VectorParams(size=1536, distance=Distance.COSINE)
             )
             print(f"Created Qdrant collection: {COLLECTION_NAME}")
+        else:
+            print(f"Qdrant collection '{COLLECTION_NAME}' already exists.")
 
     def load_and_chunk_documents(self, data_folder: str = "./data"):
         print("1. Loading and chunking documents...")
@@ -57,13 +59,19 @@ class IngestionPipeline:
         
         # Load text and markdown files
         for filepath in glob.glob(f"{data_folder}/*.txt") + glob.glob(f"{data_folder}/*.md"):
-            loader = TextLoader(filepath)
-            raw_docs.extend(loader.load())
+            try:
+                loader = TextLoader(filepath)
+                raw_docs.extend(loader.load())
+            except Exception as e:
+                print(f"Error loading {filepath}: {e}")
             
         # Load PDF files
         for filepath in glob.glob(f"{data_folder}/*.pdf"):
-            loader = PyPDFLoader(filepath)
-            raw_docs.extend(loader.load())
+            try:
+                loader = PyPDFLoader(filepath)
+                raw_docs.extend(loader.load())
+            except Exception as e:
+                print(f"Error loading {filepath}: {e}")
 
         if not raw_docs:
             print(f"No documents found in {data_folder}/. Place your files inside {data_folder}/ and try again.")
@@ -115,7 +123,6 @@ class IngestionPipeline:
 
 
 if __name__ == "__main__":
-    # Ensure local data directory exists
     os.makedirs("./data", exist_ok=True)
     
     pipeline = IngestionPipeline()
@@ -124,6 +131,6 @@ if __name__ == "__main__":
     if chunks:
         pipeline.ingest_to_qdrant(chunks)
         pipeline.ingest_to_neo4j(chunks)
-        print("\nIngestion Complete! Your databases are populated.")
+        print("\nIngestion Complete! Databases populated successfully.")
     
     pipeline.close()

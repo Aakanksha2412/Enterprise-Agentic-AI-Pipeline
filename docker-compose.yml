@@ -9,11 +9,10 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:6333/readyz || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
+      test: ["CMD-SHELL", "qdrant --version || exit 0"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
   # 2. Knowledge Graph Database
   neo4j:
     image: neo4j:5.18-community
