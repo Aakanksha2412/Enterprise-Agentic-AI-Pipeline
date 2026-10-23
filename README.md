@@ -1,6 +1,6 @@
 # Enterprise Agentic AI Pipeline with Automated Continuous Evaluation
 
-[![CI/CD Ragas Quality Gate](https://github.com/sameer2831/enterprise-agentic-rag/actions/workflows/eval.yml/badge.svg)](https://github.com/sameer2831/enterprise-agentic-rag/actions)
+[![CI/CD Ragas Quality Gate](https://github.com/Aakanksha2412/enterprise-agentic-rag/actions/workflows/eval.yml/badge.svg)](https://github.com/Aakanksha2412/enterprise-agentic-rag/actions)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![Qdrant](https://img.shields.io/badge/Qdrant-v1.10.0-red.svg)](https://qdrant.tech/)
